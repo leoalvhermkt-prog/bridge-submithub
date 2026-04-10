@@ -11,11 +11,14 @@
   ttq.page();
 }(window, document, 'ttq');
 
-ttq.track('ClickButton');
-
 setTimeout(function() {
-  window.location.href = "https://www.submithub.com/link/valeria-jasso-solo-tu";
-}, 300);
+  ttq.track('ClickButton');
+  
+  setTimeout(function() {
+    window.location.href = "https://www.submithub.com/link/valeria-jasso-solo-tu";
+  }, 200);
+  
+}, 200);
 </script>
 
 </head>
