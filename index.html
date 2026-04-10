@@ -1,27 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirigiendo...</title>
 
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
-  ttq.methods=["page","track"];
-  ttq.load('D7CK8JRC77U5V754G8Q0');
-  ttq.page();
-}(window, document, 'ttq');
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject = t;
+      var ttq = w[t] = w[t] || [];
+      ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie"];
+      ttq.setAndDefer = function(t, e) {
+        t[e] = function() {
+          t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+        };
+      };
+      for (var i = 0; i < ttq.methods.length; i++) {
+        ttq.setAndDefer(ttq, ttq.methods[i]);
+      }
+      ttq.instance = function(t) {
+        var e = ttq._i[t] || [];
+        for (var n = 0; n < ttq.methods.length; n++) {
+          ttq.setAndDefer(e, ttq.methods[n]);
+        }
+        return e;
+      };
+      ttq.load = function(e, n) {
+        var r = "https://analytics.tiktok.com/i18n/pixel/events.js";
+        ttq._i = ttq._i || {};
+        ttq._i[e] = [];
+        ttq._i[e]._u = r;
+        ttq._t = ttq._t || {};
+        ttq._t[e] = +new Date();
+        ttq._o = ttq._o || {};
+        ttq._o[e] = n || {};
+        var o = document.createElement("script");
+        o.type = "text/javascript";
+        o.async = true;
+        o.src = r + "?sdkid=" + e + "&lib=" + t;
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(o, a);
+      };
 
-setTimeout(function() {
-  ttq.track('ClickButton');
-  
-  setTimeout(function() {
-    window.location.href = "https://www.submithub.com/link/valeria-jasso-solo-tu";
-  }, 200);
-  
-}, 200);
-</script>
+      ttq.load('D7CK8JRC77U5V754G8Q0');
+      ttq.page();
 
+      setTimeout(function () {
+        ttq.track('ClickButton', {
+          content_name: 'SubmitHub Valeria Jasso'
+        });
+
+        setTimeout(function () {
+          window.location.replace('https://www.submithub.com/link/valeria-jasso-solo-tu');
+        }, 800);
+      }, 800);
+
+      setTimeout(function () {
+        window.location.replace('https://www.submithub.com/link/valeria-jasso-solo-tu');
+      }, 2500);
+    }(window, document, 'ttq');
+  </script>
 </head>
-<body>
-</body>
+<body style="margin:0;background:#fff;"></body>
 </html>
