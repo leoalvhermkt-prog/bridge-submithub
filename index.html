@@ -9,6 +9,7 @@
     !function (w, d, t) {
       w.TiktokAnalyticsObject = t;
       var ttq = w[t] = w[t] || [];
+
       ttq.methods = [
         "page", "track", "identify", "instances", "debug",
         "on", "off", "once", "ready", "alias", "group",
@@ -55,26 +56,30 @@
       // Cargar pixel
       ttq.load('D7F4UPBC77U751P3JN90');
 
-      // Vista de página
+      // Registrar vista de página
       ttq.page();
 
-      // Esperar un poco para que cargue el pixel y luego disparar eventos + redirección
-      setTimeout(function () {
-        var eventData = {
-          content_name: 'SubmitHub Valeria Jasso Solo Tu'
-        };
+      // Datos compartidos entre eventos
+      var eventData = {
+        content_name: 'SubmitHub Valeria Jasso Solo Tu'
+      };
 
-        // Evento de clic
+      // Esperar un poco a que cargue el pixel y luego disparar eventos
+      setTimeout(function () {
+        // Evento de clic dentro del sitio
         ttq.track('ClickButton', eventData);
 
-        // Evento de conversión recomendado
+        // Evento tipo formulario enviado
         ttq.track('SubmitForm', eventData);
 
-        // Pequeño margen para aumentar la probabilidad de envío de eventos
+        // Evento fuerte para optimización
+        ttq.track('CompletePayment', eventData);
+
+        // Dar tiempo a que se envíen los eventos antes del redirect
         setTimeout(function () {
           window.location.replace('https://www.submithub.com/link/valeria-jasso-solo-tu');
-        }, 500);
-      }, 800);
+        }, 800);
+      }, 1000);
 
     }(window, document, 'ttq');
   </script>
