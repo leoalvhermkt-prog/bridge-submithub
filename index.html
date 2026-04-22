@@ -56,30 +56,27 @@
       // Cargar pixel
       ttq.load('D7F4UPBC77U751P3JN90');
 
-      // Registrar vista de página
-      ttq.page();
-
-      // Datos compartidos entre eventos
+      // Datos del evento
       var eventData = {
-        content_name: 'SubmitHub Valeria Jasso Solo Tu'
+        content_name: 'SubmitHub Valeria Jasso Solo Tu',
+        content_category: 'Music Smart Link'
       };
 
-      // Esperar un poco a que cargue el pixel y luego disparar eventos
+      // Evento base de página
+      ttq.page();
+
+      // Evento de contenido visto
+      ttq.track('ViewContent', eventData);
+
+      // Esperar un poco y luego registrar clic/redirección
       setTimeout(function () {
-        // Evento de clic dentro del sitio
         ttq.track('ClickButton', eventData);
 
-        // Evento tipo formulario enviado
-        ttq.track('SubmitForm', eventData);
-
-        // Evento fuerte para optimización
-        ttq.track('CompletePayment', eventData);
-
-        // Dar tiempo a que se envíen los eventos antes del redirect
+        // Dar tiempo a que TikTok envíe el evento antes del redirect
         setTimeout(function () {
           window.location.replace('https://www.submithub.com/link/valeria-jasso-solo-tu');
-        }, 800);
-      }, 1000);
+        }, 500);
+      }, 1200);
 
     }(window, document, 'ttq');
   </script>
