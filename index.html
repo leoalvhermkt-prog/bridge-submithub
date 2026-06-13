@@ -5,35 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Redirigiendo...</title>
 
+  <!-- TikTok Pixel Base Code -->
   <script>
     !function (w, d, t) {
       w.TiktokAnalyticsObject = t;
       var ttq = w[t] = w[t] || [];
-
       ttq.methods = [
         "page", "track", "identify", "instances", "debug",
         "on", "off", "once", "ready", "alias", "group",
         "enableCookie", "disableCookie"
       ];
-
       ttq.setAndDefer = function (target, method) {
         target[method] = function () {
           target.push([method].concat(Array.prototype.slice.call(arguments, 0)));
         };
       };
-
       for (var i = 0; i < ttq.methods.length; i++) {
         ttq.setAndDefer(ttq, ttq.methods[i]);
       }
-
       ttq.instance = function (id) {
-        var instance = ttq._i[id] || [];
+        var ins = ttq._i[id] || [];
         for (var j = 0; j < ttq.methods.length; j++) {
-          ttq.setAndDefer(instance, ttq.methods[j]);
+          ttq.setAndDefer(ins, ttq.methods[j]);
         }
-        return instance;
+        return ins;
       };
-
       ttq.load = function (id, config) {
         var url = "https://analytics.tiktok.com/i18n/pixel/events.js";
         ttq._i = ttq._i || {};
@@ -43,43 +39,36 @@
         ttq._t[id] = +new Date();
         ttq._o = ttq._o || {};
         ttq._o[id] = config || {};
-
         var script = document.createElement("script");
         script.type = "text/javascript";
         script.async = true;
         script.src = url + "?sdkid=" + id + "&lib=" + t;
-
+        // CLAVE: esperar a que el script cargue antes de disparar eventos
+        script.onload = function () {
+          var eventData = {
+            content_name: 'SubmitHub Valeria Jasso Solo Tu',
+            content_category: 'Music Smart Link'
+          };
+          ttq.page();
+          ttq.track('ViewContent', eventData);
+          ttq.track('ClickButton', eventData);
+          // Redirect después de confirmar que los eventos se dispararon
+          setTimeout(function () {
+            window.location.replace('https://www.submithub.com/link/valeria-jasso-solo-tu');
+          }, 800);
+        };
+        // Fallback: si el script no carga (bloqueado, sin internet lento), redirige igual
+        script.onerror = function () {
+          window.location.replace('https://www.submithub.com/link/valeria-jasso-solo-tu');
+        };
         var firstScript = document.getElementsByTagName("script")[0];
         firstScript.parentNode.insertBefore(script, firstScript);
       };
-
-      // Cargar pixel
       ttq.load('D7F4UPBC77U751P3JN90');
-
-      // Datos del evento
-      var eventData = {
-        content_name: 'SubmitHub Valeria Jasso Solo Tu',
-        content_category: 'Music Smart Link'
-      };
-
-      // Evento base de página
-      ttq.page();
-
-      // Evento de contenido visto
-      ttq.track('ViewContent', eventData);
-
-      // Esperar un poco y luego registrar clic/redirección
-      setTimeout(function () {
-        ttq.track('ClickButton', eventData);
-
-        // Dar tiempo a que TikTok envíe el evento antes del redirect
-        setTimeout(function () {
-          window.location.replace('https://www.submithub.com/link/valeria-jasso-solo-tu');
-        }, 500);
-      }, 1200);
-
     }(window, document, 'ttq');
   </script>
 </head>
-<body style="margin:0;background:#fff;"></body>
+<body style="margin:0;background:#000;display:flex;align-items:center;justify-content:center;height:100vh;">
+  <p style="color:#fff;font-family:sans-serif;font-size:14px;">Redirigiendo...</p>
+</body>
 </html>
